@@ -1,0 +1,51 @@
+/* tag selectors */
+div {
+    background-color: lightslategray;
+}
+
+body {
+    background-color: lightcyan;
+}
+
+p {
+    color: blue;
+}
+
+/* class selectors */
+.red-text {
+    color: red;
+}
+
+.yellow-text {
+    color: yellow
+}
+
+.big-size {
+    font-size: 50px;
+}
+
+p.border {
+    border-style: solid;
+}
+
+.test1 {
+    text-align: center;
+    text-decoration: overline;
+    text-indent: 30px;
+}
+
+.test2 {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 30px;
+}
+
+.test3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+}
+
+/* id selectors */
+#div1 {
+    background-color: antiquewhite;
+}
