@@ -9,45 +9,36 @@
 </head>
 
 <body>
+    <style>
+        input {
+            display: inline-block;
+            border: 1px black solid;
+            padding: 0.8rem;
+            width: 150px;
+            text-align: center;
+            font-size: 18px;
+            background-color: grey;
+            color: aliceblue;
+        }
+    </style>
 
     <script>
-        function createButtons() {
-            let text = document.getElementById('input').value;
-            if (text == 0) {
-                alert('텍스트값을 입력해 주세요')
-            } else {
-                document.getElementsByClassName('textToColor')[0].innerHTML = '<h1>' + text + '</h1>';
-                document.getElementsByClassName('colorButton')[0].innerHTML = '<input type="button" id="red" value="빨강">';
-                document.getElementsByClassName('colorButton')[1].innerHTML = '<input type="button" id="blue" value="파랑">';
-                document.getElementsByClassName('colorButton')[2].innerHTML = '<input type="button" id="green" value="초록">';
+        function mouseOvered(i) {
+            for (let j = 0; j < 3; j++) {
+                if (j == i) {
+                    document.getElementsByTagName("input")[j].style.backgroundColor = "white";
+                    document.getElementsByTagName("input")[j].style.color = "black";
+                } else {
+                    document.getElementsByTagName("input")[j].style.backgroundColor = "grey";
+                    document.getElementsByTagName("input")[j].style.color = "white";
+                }
             }
-        }
-
-        function toRed() {
-            alert('빨강으로 변경됩니다.')
-            document.getElementsByClassName('textToColor')[0].style.color = "red"
-        }
-
-        function toBlue() {
-            alert('파랑으로 변경됩니다.')
-            document.getElementsByClassName('textToColor')[0].style.color = "blue"
-        }
-
-        function toGreen() {
-            alert('초록으로 변경됩니다.')
-            document.getElementsByClassName('textToColor')[0].style.color = "green"
         }
     </script>
 
-    <p>입력: <input type="text" id="input"></input></p>
-    <input type="button" id="input" value="제출" onclick="createButtons()">
-    <br>
-    <p class="textToColor"></p>
-    <a class="colorButton" onclick="toRed()"></a>
-    <a class="colorButton" onclick="toBlue()"></a>
-    <a class="colorButton" onclick="toGreen()"></a>
-
-
+    <input type="button" onmouseover="mouseOvered(0)" value="html">
+    <input type="button" onmouseover="mouseOvered(1)" value="css">
+    <input type="button" onmouseover="mouseOvered(2)" value="javascript">
 </body>
 
 </html>

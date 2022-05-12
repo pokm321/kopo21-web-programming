@@ -6,21 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="my_scripts.js"></script>
 </head>
 
 <body>
+
     <script>
-        function myAlert() {
-            // alert('경고3');
-            console.log('경고')
+        function createButtons() {
+            let text = document.getElementById('input').value;
+            if (text == 0) {
+                alert('텍스트값을 입력해 주세요')
+            } else {
+                document.getElementsByClassName('textToColor')[0].innerHTML = '<h1>' + text + '</h1>';
+                document.getElementsByClassName('colorButton')[0].innerHTML = '<input type="button" id="red" value="빨강">';
+                document.getElementsByClassName('colorButton')[1].innerHTML = '<input type="button" id="blue" value="파랑">';
+                document.getElementsByClassName('colorButton')[2].innerHTML = '<input type="button" id="green" value="초록">';
+            }
+        }
+
+        function toRed() {
+            alert('빨강으로 변경됩니다.')
+            document.getElementsByClassName('textToColor')[0].style.color = "red"
+        }
+
+        function toBlue() {
+            alert('파랑으로 변경됩니다.')
+            document.getElementsByClassName('textToColor')[0].style.color = "blue"
+        }
+
+        function toGreen() {
+            alert('초록으로 변경됩니다.')
+            document.getElementsByClassName('textToColor')[0].style.color = "green"
         }
     </script>
 
-    <input type="button" value="버튼1" onclick="javascript:alert('경고1')">
-    <button onclick="alert('경고2')">버튼2</button>
-    <button onclick="myAlert()">버튼3</button>
-    <button ondblclick="showMyName()">더블클릭</button>
+    <p>입력: <input type="text" id="input"></input></p>
+    <input type="button" id="input" value="제출" onclick="createButtons()">
+    <br>
+    <p class="textToColor"></p>
+    <a class="colorButton" onclick="toRed()"></a>
+    <a class="colorButton" onclick="toBlue()"></a>
+    <a class="colorButton" onclick="toGreen()"></a>
+
+
 </body>
 
 </html>

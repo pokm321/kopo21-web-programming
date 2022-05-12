@@ -9,68 +9,36 @@
 </head>
 
 <body>
-    <script>
-        let isSmallText = true;
-
-        function addTag() {
-            document.write('<h1>Hello World</h1>');
-        }
-
-        function getTitle() {
-            let title = document.getElementById('title');
-            console.log(title.textContent)
-        }
-
-        function getItems() {
-            let items = document.getElementsByClassName("item");
-            items[2].textContent = '바보야';
-        }
-
-        function changeClassName() {
-            let target = document.getElementById('target');
-
-            if (isSmallText) {
-                target.className = 'big-text';
-                isSmallText = false;
-            } else {
-                target.className = 'small-text';
-                isSmallText = true;
-            }
-        }
-
-        function changeHTML() {
-            let pic = document.getElementById('changing');
-            console.log(pic.innerHTML)
-            pic.innerHTML = "<h1>뿅!!!</h1>"
-        }
-    </script>
-
     <style>
-        .big-text {
-            font-size: x-large;
-        }
-
-        .small-text {
-            font-size: small;
+        input {
+            display: inline-block;
+            border: 1px black solid;
+            padding: 0.8rem;
+            width: 150px;
+            text-align: center;
+            font-size: 18px;
+            background-color: grey;
+            color: aliceblue;
         }
     </style>
 
-    <button onclick="addTag()">TAG 추가</button>
-    <button onclick="getTitle()">Title 얻기</button>
-    <button onclick="getItems()">Items 얻기</button>
+    <script>
+        function clicked(i) {
+            for (let j = 0; j < 3; j++) {
+                if (j == i) {
+                    document.getElementsByTagName("input")[j].style.backgroundColor = "white";
+                    document.getElementsByTagName("input")[j].style.color = "black";
+                } else {
+                    document.getElementsByTagName("input")[j].style.backgroundColor = "grey";
+                    document.getElementsByTagName("input")[j].style.color = "white";
+                }
+            }
+        }
+    </script>
 
-
-    <h1 id="title">Hello World</h1>
-
-    <ul>
-        <li class="item">1</li>
-        <li class="item">2</li>
-        <li class="item">3</li>
-        <li class="item">4</li>
-    </ul>
-
-    <div id="target" class="small-text" onclick="changeClassName()">누르면 글자크기바뀜</div><br>
-    <div onclick="changeHTML()" id="changing">누르면 뿅</div>
+    <input type="button" onclick="clicked(0)" value="html">
+    <input type="button" onclick="clicked(1)" value="css">
+    <input type="button" onclick="clicked(2)" value="javascript">
 </body>
 
 </html>
