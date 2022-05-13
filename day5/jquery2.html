@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <style>
+    .whole {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      text-indent: 10px;
+      width: 250px;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    header {
+      background-color: rgb(45, 73, 158);
+      color: rgb(239, 238, 241);
+    }
+
+    .body {
+      background-color: rgb(238, 238, 238);
+    }
+
+    .conversation {
+      text-indent: 0px;
+      padding: 5px;
+      width: 200px;
+      position: relative;
+      left: 20px;
+      line-height: 20px;
+    }
+
+    .line {
+      background-color: white;
+      padding: 5px;
+    }
+
+    button {
+      border: 1px black solid;
+      background-color: grey;
+      padding: 5px;
+    }
+  </style>
+
+  <script>
+    $(function () {
+      $('#submit').click(function () {
+        do {
+          text = prompt("내용 입력: ")
+          $('.conversation').append("<div class=\"line\">" + text + "</div><br>")
+        } while (text != "")
+      })
+    })
+  </script>
+
+  <div class="whole">
+    <header>
+      기사 등록하기
+    </header>
+    <div class="body">
+      <br>
+      <div class="conversation"></div>
+    </div>
+    <button id="submit">등록하기</button>
+  </div>
+</body>
+
+</html>

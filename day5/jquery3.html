@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <style>
+    input {
+      display: inline-block;
+      border: 1px black solid;
+      padding: 0.8rem;
+      width: 150px;
+      text-align: center;
+      font-size: 18px;
+      background-color: grey;
+      color: aliceblue;
+    }
+  </style>
+
+  <script>
+    $(function () {
+      $('#html').click(function () {
+        $('#html').attr("onclick", "clicked(0)")
+      })
+
+      $('#css').click(function () {
+        $('#css').attr("onclick", "clicked(1)")
+      })
+      $('#javascript').click(function () {
+        $('#javascript').attr("onclick", "clicked(2)")
+      })
+    })
+
+    function clicked(i) {
+      for (let j = 0; j < 3; j++) {
+        if (j == i) {
+          document.getElementsByTagName("input")[j].style.backgroundColor = "white";
+          document.getElementsByTagName("input")[j].style.color = "black";
+        } else {
+          document.getElementsByTagName("input")[j].style.backgroundColor = "grey";
+          document.getElementsByTagName("input")[j].style.color = "white";
+        }
+      }
+    }
+  </script>
+
+  <input type="button" id="html" value="html">
+  <input type="button" id="css" value="css">
+  <input type="button" id="javascript" value="javascript">
+</body>
+
+</html>

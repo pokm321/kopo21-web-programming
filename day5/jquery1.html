@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <script>
+    $(function () {
+      $('#submit').click(function () {
+        let text = $('#input').val();
+        console.log(text);
+        if (text == 0) {
+          alert('텍스트값을 입력해 주세요');
+        } else {
+          $('#textToColor').html('<h1>' + text + '</h1>')
+          $('#redButtonSpace').html('<input type="button" id="redButton" value="빨강" onclick="toRed()">');
+          $('#blueButtonSpace').html('<input type="button" id="blueButton" value="파랑" onclick="toBlue()">');
+          $('#greenButtonSpace').html('<input type="button" id="greenButton" value="초록" onclick="toGreen()">');
+        }
+      });
+    });
+
+    function toRed() {
+      alert('빨강으로 변경됩니다.')
+      document.getElementById('textToColor').style.color = "red"
+    }
+
+    function toBlue() {
+      alert('파랑으로 변경됩니다.')
+      document.getElementById('textToColor').style.color = "blue"
+    }
+
+    function toGreen() {
+      alert('초록으로 변경됩니다.')
+      document.getElementById('textToColor').style.color = "green"
+    }
+  </script>
+
+  <p>입력: <input type="text" id="input"></input></p>
+  <input type="button" id="submit" value="제출"><br>
+
+  <p id="textToColor"></p>
+  <a id="redButtonSpace"></a>
+  <a id="blueButtonSpace"></a>
+  <a id="greenButtonSpace"></a>
+
+
+</body>
+
+</html>

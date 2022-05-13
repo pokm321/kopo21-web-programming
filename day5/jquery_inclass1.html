@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <script>
+    $(function () {
+      console.log('load!!');
+
+      function alert2() {
+        alert('hi');
+      }
+
+      $('#button1').on('click', function () {
+        console.log('click!');
+      });
+
+      $('#button2').on('mouseenter', function () {
+        console.log('mouse entered!');
+      });
+
+      $('#button3').on('mouseenter', function () {
+        console.log('mouse entered!');
+      }).on('mouseleave', function () {
+        console.log('mouse left!');
+      }).on('click', function () {
+        console.log('click!');
+      });
+
+      $('#button4').text('<b>fdsfasd</b>')
+
+      $('#button5').click(function () {
+        // $('#text').html('<b>new text</b>');
+        // $('#text').text('<b>html</b>');
+        $('#text').append('hello')
+          .append(' world')
+          .attr('class', 'hello')
+          .attr('name', 'world');
+
+        $('.big-text').attr('name', 'hello');
+
+        console.log(document.getElementById('text'));
+      });
+    });
+
+  </script>
+
+
+  <div id="title">title</div>
+  <div id="text">text</div>
+  <div id="big-text">big text</div>
+  <button id="button1">클릭1</button>
+  <button id="button2">클릭2</button>
+  <button id="button3">클릭3</button>
+  <button id="button4">클릭4</button>
+  <button id="button5">클릭5</button>
+
+</body>
+
+</html>
