@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <script>
+    $(function () { // on load
+      $('#all_check_button').click(function () {
+        $(':checkbox[name=mycheck]').each(function () {
+          this.checked = true;
+        })
+
+      })
+
+      $('#check_number_button').click(function () {
+        if ($(':checkbox[name=mycheck]').is(':checked') == true) {
+          $('#result').text('OK')
+        }
+
+
+      })
+
+      $('#box').mouseover(function () {
+        this.animate({
+          left: '250px'
+        })
+      })
+
+    })
+
+  </script>
+
+  <style>
+    #box {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: aquamarine;
+      border: 1px black solid;
+    }
+  </style>
+
+  <form action="">
+    <input type="checkbox" name="mycheck" id="">
+    <input type="checkbox" name="mycheck" id="">
+    <input type="checkbox" name="mycheck" id="">
+    <input type="checkbox" name="mycheck" id="">
+    <input type="checkbox" name="mycheck" id="">
+    <input type="button" id="all_check_button" value="전체 체크"></input>
+    <input type="button" id="check_number_button" value="체크확인"></input>
+    <span id="result"></span>
+  </form>
+
+  <div id="box"></div>
+</body>
+
+</html>

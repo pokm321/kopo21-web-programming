@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <script>
+    $(function () {
+      $('.submit').click(function () {
+        if ($('#id').val() == 0) {
+          alert('아이디를 입력하세요.')
+        } else if ($('#id').val().includes('@') == false) {
+          alert('아이디가 이메일 형식에 맞지 않습니다.')
+        } else if ($('#password').val().length < 5) {
+          alert('5자 이상의 비밀번호를 입력하세요.')
+        } else if ($(':radio[name=sex]:checked').length == 0) {
+          alert('성별을 선택해주세요.')
+        } else if ($('[id=job]:selected').length == 0) {
+          alert("직업을 선택하세요.")
+        } else if ($('[id=hobby]:checked').length < 3) {
+          alert("취미를 3개 이상 선택하세요.")
+        } else {
+          alert('회원가입이 완료되었습니다.')
+          document.getElementById('form').submit();
+        }
+      })
+    })
+  </script>
+
+  <style>
+    #button {
+      padding: 5px;
+      width: 120px;
+      border: 1px solid;
+      margin: 10px;
+    }
+
+    #index {
+      display: inline-block;
+      width: 80px;
+    }
+  </style>
+
+  <form action="" id="form">
+    <p>
+      <span id="index">아이디</span><input type="email" id="id">
+    </p>
+    <p>
+      <span id="index">비밀번호</span><input type="password" id="password">
+    </p>
+    <p>
+      <span id="index">성별</span>
+      <input type="radio" id="male" name="sex">남자 &nbsp &nbsp &nbsp
+      <input type="radio" id="female" name="sex">여자
+    </p>
+    <p>
+      <span id="index">직업</span>
+      <select>
+        <option id="" value=""></option>
+        <option id="job" value="">학생</option>
+        <option id="job" value="">군인</option>
+        <option id="job" value="">회사원</option>
+        <option id="job" value="">공무원</option>
+        <option id="job" value="">자영업</option>
+        <option id="job" value="">무직</option>
+        <option id="job" value="">기타</option>
+      </select>
+    </p>
+    <p>
+      <span id="index">취미</span>
+      <input type="checkbox" id="hobby">개발
+      <input type="checkbox" id="hobby">게임
+      <input type="checkbox" id="hobby">낚시
+      <br><span id="index"></span>
+      <input type="checkbox" id="hobby">운동
+      <input type="checkbox" id="hobby">독서
+      <input type="checkbox" id="hobby">음악감상
+    </p>
+    <p>
+      <input type="reset" id="button" value="취소">
+      <input type="button" id="button" class="submit" value="회원가입">
+    </p>
+  </form>
+</body>
+
+</html>
