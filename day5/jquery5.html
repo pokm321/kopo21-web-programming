@@ -11,43 +11,100 @@
 
 <body>
   <style>
-    table {
+    table,
+    th,
+    td {
       text-align: center;
+      border: 1px solid;
+      border-collapse: collapse;
+      width: 400px;
+    }
+
+    #log {
+      display: inline-block;
+      margin: 15px;
+      margin-left: 280px;
+      border: 1px solid;
+      background-color: lightgray;
+      padding: 7px;
+      width: 120px;
     }
   </style>
 
-  <table border="1px black solid" width="400px">
+  <script>
+    $(function () {
+      let reload = false;
+
+      $("#checkAll").click(function () {
+        if (this.checked == true) {
+          $(":checkbox[id=checkbox]").prop("checked", true);
+        } else {
+          $(":checkbox[id=checkbox]").prop("checked", false);
+        }
+      })
+
+      $(":checkbox[id=checkbox]").click(function () {
+        if ($(":checkbox[id=checkbox]:checked").length < $(":checkbox[id=checkbox]").length) {
+          $("#checkAll").prop("checked", false)
+        } else {
+          $("#checkAll").prop("checked", true)
+        }
+      })
+
+      $("#log").click(function () {
+        if (reload == true) {
+          location.reload();
+        } else {
+          if ($(":checkbox[id=checkbox]:checked").length == 0) {
+            alert("선택된 제목이 없습니다.")
+          } else {
+            $(":checkbox[id=checkbox]:not(:checked)").each(function () {
+              $(this).parent().parent().remove();
+            })
+
+            $("#log").text("돌아가기");
+            reload = true;
+          }
+        }
+      })
+      
+    })
+  </script>
+
+  <table>
     <tr>
-      <td><input type="checkbox" name="checkAll">확인</td>
+      <td><input type="checkbox" id="checkAll">확인</td>
       <td>제목</td>
       <td>글쓴시간</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" id="checkbox"></td>
       <td>11111</td>
-      <td>11:11:00</td>
+      <td>08:11:00</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
-      <td>asdfdsa</td>
-      <td>11:11:00</td>
+      <td><input type="checkbox" id="checkbox"></td>
+      <td>abcdef</td>
+      <td>11:23:00</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
-      <td>sfdaasd</td>
-      <td>11:11:00</td>
+      <td><input type="checkbox" id="checkbox"></td>
+      <td>22222</td>
+      <td>11:58:00</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
-      <td>fdsafsd</td>
-      <td>11:11:00</td>
+      <td><input type="checkbox" id="checkbox"></td>
+      <td>sayyes</td>
+      <td>12:13:00</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
-      <td>fdsafdsaa</td>
-      <td>11:11:00</td>
+      <td><input type="checkbox" id="checkbox"></td>
+      <td>3333</td>
+      <td>12:53:00</td>
     </tr>
   </table>
+
+  <button id="log">로그</button>
 </body>
 
 </html>
