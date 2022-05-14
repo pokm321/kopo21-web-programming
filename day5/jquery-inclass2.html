@@ -16,25 +16,32 @@
         $(':checkbox[name=mycheck]').each(function () {
           this.checked = true;
         })
-
       })
 
       $('#check_number_button').click(function () {
         if ($(':checkbox[name=mycheck]').is(':checked') == true) {
-          $('#result').text('OK')
+          $('#result').append('OK')
         }
-
-
       })
 
       $('#box').mouseover(function () {
-        this.animate({
-          left: '250px'
+        $(this).animate({
+          left: "+=100px",
+          top: "+=100px"
         })
+        $(this).hide(500);
+        $(this).show(500);
+        $(this).fadeOut(500);
+        $(this).fadeIn(500);
+        $(this).slideUp(500);
       })
+
 
     })
 
+    function test() {
+      alert("you waited for 2 seconds.")
+    }
   </script>
 
   <style>
