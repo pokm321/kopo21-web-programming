@@ -45,42 +45,57 @@
       const CHAR_WIDTH = parseInt($("#ghost").css("width"))
       const CHAR_HEIGHT = parseInt($("#ghost").css("height"))
 
-      $(document).on("keydown", function (e) {
-        let positionX = parseInt($("#ghost").css("left"))
-        let positionY = parseInt($("#ghost").css("top"))
+      keyPressed = [];
 
-        if (e.which == LEFT_KEYCODE) {
-          $("#ghost").animate({
-            left: "-=" + (positionX - LEFT_WALL) + "px"
-          }, (positionX - LEFT_WALL) / SPEED, function () {
-            this.stop(true)
-          })
-        } else if (e.which == UP_KEYCODE) {
-          $("#ghost").animate({
-            top: "-=" + (positionY - TOP_WALL) + "px"
-          }, (positionY - TOP_WALL) / SPEED, function () {
-            this.stop(true)
-          })
-        } else if (e.which == RIGHT_KEYCODE) {
-          $("#ghost").animate({
-            left: "+=" + (RIGHT_WALL - positionX - CHAR_WIDTH) + "px"
-          }, (RIGHT_WALL - positionX - CHAR_WIDTH) / SPEED, function () {
-            this.stop(true)
-          })
-        } else if (e.which == DOWN_KEYCODE) {
-          $("#ghost").animate({
-            top: "+=" + (BOTTOM_WALL - positionY - CHAR_HEIGHT) + "px"
-          }, (BOTTOM_WALL - positionY - CHAR_HEIGHT) / SPEED, function () {
-            this.stop(true)
-          })
+      $(document).on("keydown", function (e) {
+        if (keyPressed.includes(e.which) == false) {
+          $("#ghost").stop(true);
+          keyPressed.unshift(e.which);
+          getDirection();
+          e.preventDefault();
         }
-        e.preventDefault();
+
       });
 
       $(document).on("keyup", function (e) {
-        $("#ghost").stop(true);
+        if (keyPressed.indexOf(e.which) == 0) {
+          $("#ghost").stop(true);
+        }
+        keyPressed.splice(keyPressed.indexOf(e.which), 1)
+        getDirection();
         e.preventDefault();
       });
+
+      function getDirection() {
+        positionX = parseInt($("#ghost").css("left"))
+        positionY = parseInt($("#ghost").css("top"))
+
+        if (keyPressed[0] == LEFT_KEYCODE) {
+          $("#ghost").animate({
+            left: "-=" + (positionX - LEFT_WALL) + "px"
+          }, (positionX - LEFT_WALL) / SPEED, function () {
+            $(this).stop(true)
+          })
+        } else if (keyPressed[0] == UP_KEYCODE) {
+          $("#ghost").animate({
+            top: "-=" + (positionY - TOP_WALL) + "px"
+          }, (positionY - TOP_WALL) / SPEED, function () {
+            $(this).stop(true)
+          })
+        } else if (keyPressed[0] == RIGHT_KEYCODE) {
+          $("#ghost").animate({
+            left: "+=" + (RIGHT_WALL - positionX - CHAR_WIDTH) + "px"
+          }, (RIGHT_WALL - positionX - CHAR_WIDTH) / SPEED, function () {
+            $(this).stop(true)
+          })
+        } else if (keyPressed[0] == DOWN_KEYCODE) {
+          $("#ghost").animate({
+            top: "+=" + (BOTTOM_WALL - positionY - CHAR_HEIGHT) + "px"
+          }, (BOTTOM_WALL - positionY - CHAR_HEIGHT) / SPEED, function () {
+            $(this).stop(true)
+          })
+        }
+      }
 
     })
   </script>
