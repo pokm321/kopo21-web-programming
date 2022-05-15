@@ -26,28 +26,32 @@
   <script>
     $(function () {
       $('#html').click(function () {
-        $('#html').attr("onclick", "clicked(0)")
+        $("#html").css("background-color", "white")
+        $("#html").css("color", "black")
+        $("#css").css("background-color", "grey")
+        $("#css").css("color", "white")
+        $("#javascript").css("background-color", "grey")
+        $("#javascript").css("color", "white")
       })
 
       $('#css').click(function () {
-        $('#css').attr("onclick", "clicked(1)")
+        $("#html").css("background-color", "grey")
+        $("#html").css("color", "white")
+        $("#css").css("background-color", "white")
+        $("#css").css("color", "black")
+        $("#javascript").css("background-color", "grey")
+        $("#javascript").css("color", "white")
       })
+
       $('#javascript').click(function () {
-        $('#javascript').attr("onclick", "clicked(2)")
+        $("#html").css("background-color", "grey")
+        $("#html").css("color", "white")
+        $("#css").css("background-color", "grey")
+        $("#css").css("color", "white")
+        $("#javascript").css("background-color", "white")
+        $("#javascript").css("color", "black")
       })
     })
-
-    function clicked(i) {
-      for (let j = 0; j < 3; j++) {
-        if (j == i) {
-          document.getElementsByTagName("input")[j].style.backgroundColor = "white";
-          document.getElementsByTagName("input")[j].style.color = "black";
-        } else {
-          document.getElementsByTagName("input")[j].style.backgroundColor = "grey";
-          document.getElementsByTagName("input")[j].style.color = "white";
-        }
-      }
-    }
   </script>
 
   <input type="button" id="html" value="html">
