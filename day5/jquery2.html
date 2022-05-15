@@ -54,7 +54,9 @@
       $('#submit').click(function () {
         do {
           text = prompt("내용 입력: ")
-          $('.conversation').append("<div class=\"line\">" + text + "</div><br>")
+          if (text != "") {
+            $('.conversation').append("<div class=\"line\">" + text + "</div><br>")
+          }
         } while (text != "")
       })
     })
