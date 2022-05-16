@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <style>
+    #wrapper {
+      overflow: hidden;
+      position: absolute;
+      width: 1200px;
+      height: 600px;
+      border: 12px solid;
+    }
+
+    #background {
+      position: absolute;
+      width: 200%;
+      height: 600px;
+      background-image: url("https://wallpaperaccess.com/full/3739446.jpg");
+      background-size: contain;
+      animation-name: slide;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    #logo div,
+    #logo img,
+    #tutorial {
+      position: absolute;
+      width: 600px;
+      left: 310px;
+      top: 100px;
+      font-size: x-large;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      color: white;
+    }
+
+    #gameOver {
+      position: absolute;
+      width: 1220px;
+      height: 620px;
+      background-color: black;
+      color: aliceblue;
+      font-size: 90px;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      opacity: 0;
+    }
+
+    #gameOverScore {
+      position: absolute;
+      font-size: 30px;
+      width: 1200px;
+    }
+
+    #goomba {
+      position: absolute;
+      width: 80px;
+      left: 100px;
+      top: 439px;
+    }
+
+    #fire {
+      position: absolute;
+      width: 50px;
+      left: 120px;
+      top: 463px;
+      opacity: 0;
+    }
+
+    .classic {
+      position: absolute;
+      width: 80px;
+      left: 1300px;
+      top: 359px;
+      transform: scaleX(-1);
+    }
+
+    .weird {
+      position: absolute;
+      width: 90px;
+      left: 1300px;
+      top: 270px;
+      transform: scaleX(-1);
+      height: 250px;
+    }
+
+    #score {
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      font-size: x-large;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    @keyframes slide {
+      from {
+        left: 0px;
+      }
+
+      to {
+        left: -89%;
+      }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  </style>
+
+  <script>
+    $("body").on("keypress", function (e) {
+      if (e.key == " " && isDead == false) {
+        jump();
+      } else if (e.key == " " && isDead && canStart) {
+        startGame();
+      } else if (e.key == "a") {
+        fire();
+      }
+      e.preventDefault();
+    })
+
+    $(function () {
+      FPS = 30;
+
+      GOOMBA_START_POINT = $("#goomba").css("top")
+      GOOMBA_JUMPING_ABILITY = 320;
+      GOOMBA_FIRE_SPEED = 2000;
+
+      FIRE_START_POINT = $("#fire").css("left");
+      FIRE_COOLTIME = 3000;
+
+      MARIO_START_POINT = $("#mario").css("left");
+      DEFAULT_SPEED_MARIO = 2000;
+      RANDOMNESS_SPEED_MARIO = 500;
+
+      WEIRD_MARIO_RATIO = 0.2;
+
+      highScore = 0;
+      isDead = true;
+      canStart = false;
+      breakRecord = false;
+
+      $("#logo").hide();
+      $("#logo").fadeIn(1000, function () {
+        canStart = true;
+      });
+      $("#tutorial").hide();
+    })
+
+    function startGame() {
+      gameFrame = setInterval(hitscan, 1000 / FPS);
+      reset();
+      showScore();
+      moveMario();
+    }
+
+    function reset() {
+      score = 0;
+      isDead = false;
+      isJumping = false;
+      isFiring = false;
+      isCooldown = false;
+      isWeird = false;
+      breakRecord = false;
+      $("#gameOver").css("opacity", "0");
+      $("#logo").css("opacity", "0");
+      $("#tutorial").show();
+      $("#tutorial").delay(2000).fadeOut();
+      $("#goomba").css("filter", "grayscale(0)");
+    }
+
+    function gameOver() {
+      isDead = true;
+      clearInterval(gameFrame);
+      $("img").stop(true, true)
+      $("#goomba").css("top", GOOMBA_START_POINT)
+
+      $("#gameOver").css("opacity", "1")
+      if (breakRecord) {
+        $("#gameOverScore").html("HIGH SCORE!<br><br><br>BEST ROUND: " + highScore + "&nbsp &nbsp &nbspTHIS ROUND: " + score + "<br><br><br><br>PRESS SPACEBAR TO RESTART")
+      } else {
+        $("#gameOverScore").html("<br>BEST ROUND: " + highScore + "&nbsp &nbsp &nbspTHIS ROUND: " + score + "<br><br><br><br><br><br>PRESS SPACEBAR TO RESTART")
+      }
+    }
+
+    function showScore() {
+      if (score > highScore) {
+        highScore = score;
+        breakRecord = true;
+        $("#score").html("BEST ROUND: " + highScore + "<br><br>THIS ROUND: " + score + "&nbsp &nbsp <b>HIGH SCORE!</b>")
+      } else {
+        $("#score").html("BEST ROUND: " + highScore + "<br><br>THIS ROUND: " + score)
+      }
+    }
+
+    function moveMario() {
+      if (isDead) {
+        return;
+      }
+      marioSpeed = (Math.random() * RANDOMNESS_SPEED_MARIO) + DEFAULT_SPEED_MARIO;
+      whichMario = Math.random();
+      if (whichMario > WEIRD_MARIO_RATIO) {
+        $(".classic").animate({
+          left: "-=1700px"
+        }, marioSpeed, function () {
+          $(this).css("left", MARIO_START_POINT);
+          if (isDead == false) {
+            score += 100;
+            showScore();
+            moveMario();
+          }
+        })
+      } else {
+        isWeird = true;
+        $(".weird").animate({
+          left: "-=1700px"
+        }, marioSpeed, function () {
+          $(this).css("left", MARIO_START_POINT);
+          isWeird = false;
+          if (isDead == false) {
+            score += 100;
+            showScore();
+            moveMario();
+          }
+        })
+      }
+
+    }
+
+    function hitscan() {
+      let goombaBottom = parseInt($("#goomba").css("height")) + parseInt($("#goomba").css("top"));
+      let goombaLeft = parseInt($("#goomba").css("left"));
+      let goombaRight = parseInt($("#goomba").css("left")) + parseInt($("#goomba").css("width"));
+
+      if (isWeird) {
+        var mario = $(".weird")
+      } else {
+        var mario = $(".classic")
+      }
+
+      let marioTop = parseInt(mario.css("top"));
+      let marioLeft = parseInt(mario.css("left"));
+      let marioRight = parseInt(mario.css("left")) + parseInt(mario.css("width"));
+
+      let fireLeft = parseInt($("#fire").css("left"));
+      let fireRight = parseInt($("#fire").css("left")) + parseInt($("#fire").css("width"));
+
+      if (goombaBottom > marioTop && goombaRight > marioLeft && goombaLeft < marioRight) {
+        gameOver();
+      }
+
+      if (fireRight > marioLeft && fireLeft < marioRight && isFiring == true) {
+        $("#fire").stop(true, true)
+        mario.stop(true, true)
+      }
+    }
+
+    function jump() {
+      if (isJumping || isDead) {
+        return;
+      }
+
+      isJumping = true;
+      $("#goomba").animate({
+        top: "-=" + GOOMBA_JUMPING_ABILITY + "px"
+      }, 450).animate({
+        top: "+=" + GOOMBA_JUMPING_ABILITY + "px"
+      }, 450, function () {
+        isJumping = false;
+      })
+    }
+
+    function fire() {
+      if (isJumping || isCooldown || isFiring || isDead) {
+        return;
+      }
+
+      isFiring = true;
+      $("#goomba").css("filter", "grayscale(0.7)");
+      $("#fire").css("opacity", "1").animate({
+        left: "+=1500px"
+      }, GOOMBA_FIRE_SPEED, function () {
+        $(this).css("opacity", "0").css("left", FIRE_START_POINT)
+        isCooldown = true
+        isFiring = false;
+        setTimeout(() => {
+          isCooldown = false;
+          $("#goomba").css("filter", "grayscale(0)");
+        }, FIRE_COOLTIME)
+      })
+    }
+
+  </script>
+  <div id="wrapper">
+    <div id="background"></div>
+    <img id="fire" src="https://thumbs.gfycat.com/SlipperyObedientBasil-max-1mb.gif" alt="">
+    <img id="goomba" src="https://www.linkpicture.com/q/14153dbda06f26fe.gif" alt="">
+    <img id="mario" class="classic" src="https://i.pinimg.com/originals/4d/1e/b2/4d1eb2fb62a71b8d3d82523e3e2b6987.gif"
+      alt="">
+    <img id="mario" class="weird" src="https://www.linkpicture.com/q/weird-mario-super-mario.gif" alt="">
+    <div id="score"></div>
+  </div>
+
+  <div id="tutorial"><br><br><br><br>SPACEBAR : JUMP<br><br>A : SHOOT</div>
+
+  <div id="logo">
+    <img src="https://media.vgm.io/products/85/258/258-1596516275.png" alt="">
+    <div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>PRESS SPACEBAR TO START</div>
+  </div>
+
+  <div id="gameOver">
+    <div><br>GAME OVER<br><br></div>
+    <div id="gameOverScore"></div>
+  </div>
+</body>
+
+</html>
