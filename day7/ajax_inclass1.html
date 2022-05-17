@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function loadDoc() {
+      let xhttp = new XMLHttpRequest();
+
+      // 응답 왔을때의 콜백 함수
+      xhttp.onreadystatechange = function () {
+
+        //  this.readyState == 4 : 정상완료 (응답만 오면 오류여도 정상임)
+        // this.status == 200 : 서버 입장에서 정상 동작이다.
+        // this.status == 404 : 오류 (Not Found)
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("demo").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "ajax_info.txt", true)
+      xhttp.send();
+    }
+  </script>
+
+  <div id="demo"></div>
+  <button onclick="loadDoc()">get Data</button>
+</body>
+
+</html>
