@@ -11,9 +11,27 @@
 
 <body>
   <style>
+    body {
+      background-color: rgb(53, 53, 53);
+      color: azure;
+      margin: 30px;
+    }
+
     img {
       display: inline-block;
-      width: 50%;
+      width: 40%;
+    }
+
+    #info {
+      font-weight: 900;
+      margin: 20px;
+      border-radius: 25px;
+      background: dimgray;
+      padding: 20px;
+    }
+
+    #infoBox {
+      position: absolute;
     }
   </style>
 
@@ -27,7 +45,14 @@
         .then(response => response.json())
         .then(movie => {
           let comments = $("#comments")
-          comments.append(`<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img><h1>${movie.title}</h1><li>${movie.overview}</li><li>발매일: ${movie.release_date}</li>`)
+          comments.append(`<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
+          <span id="infoBox">
+            <p id="info">발매일&nbsp &nbsp ${movie.release_date}</p>
+            <p id="info">평점&nbsp &nbsp &nbsp&nbsp ${movie.vote_average}</p>
+            <p id="info">인기도&nbsp &nbsp ${movie.popularity}</p>
+          </span>
+          <h1>${movie.title}</h1>
+          <li>${movie.overview}</li><br>`)
         })
     })
 
