@@ -44,11 +44,12 @@
       fetch("https://api.themoviedb.org/3/movie/upcoming?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1")
         .then(response => response.json())
         .then(jsonArray => {
-          jsonArray.results.forEach((data) => {
+          let movies = jsonArray.results
+          movies.forEach((movie) => {
             $("#container").append(`<div class="card">
-      <img src="https://image.tmdb.org/t/p/w500/${data.backdrop_path}">
+      <img src="https://image.tmdb.org/t/p/w500/${movie.backdrop_path}">
       <div class="container">
-        <h4><b>${data.title}</b></h4>
+        <h4><b>${movie.title}</b></h4>
       </div>
     </div>`)
           })

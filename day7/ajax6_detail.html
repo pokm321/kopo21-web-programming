@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,27 +8,33 @@
   <title>Document</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
+  <style>
+    img {
+      display: inline-block;
+      width: 50%;
+    }
+  </style>
+
   <script>
     $(function () {
       const queryString = window.location.search;
       const parameters = new URLSearchParams(queryString);
       const id = parameters.get("id");
-      console.log(id);
 
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+      fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1`)
         .then(response => response.json())
-        .then(jsonArray => {
+        .then(movie => {
           let comments = $("#comments")
-          jsonArray.forEach((data) => {
-            comments.append(`<li>${data.body}</li>`)
-          })
+          comments.append(`<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img><h1>${movie.title}</h1><li>${movie.overview}</li><li>발매일: ${movie.release_date}</li>`)
         })
     })
 
-    
+
   </script>
 
   <div id="comments"></div>
 </body>
+
 </html>
