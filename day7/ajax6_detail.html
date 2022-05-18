@@ -44,8 +44,8 @@
       fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1`)
         .then(response => response.json())
         .then(movie => {
-          let comments = $("#comments")
-          comments.append(`<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
+          let detail = $("#detail")
+          detail.append(`<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
           <span id="infoBox">
             <p id="info">발매일&nbsp &nbsp ${movie.release_date}</p>
             <p id="info">평점&nbsp &nbsp &nbsp&nbsp ${movie.vote_average}</p>
@@ -59,7 +59,7 @@
 
   </script>
 
-  <div id="comments"></div>
+  <div id="detail"></div>
 </body>
 
 </html>
