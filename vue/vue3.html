@@ -13,9 +13,12 @@
 <body>
   <div id="app">
     <input v-model="query" placeholder="검색어">
+    <div>
+      {{ message }}
+    </div>
     <ul>
-      <li v-for="post in filteredPosts">
-        {{ post.title }}
+      <li v-for="item in realtimeArrivalList">
+        {{ item.trainLineNm }}, {{ item.arvlMsg2 }}
       </li>
     </ul>
   </div>
@@ -24,33 +27,35 @@
     let app = new Vue({
       el: '#app',
       data: {
+        message: '',
         query: '',
-        posts: [],  // 전체 데이터
-        filteredPosts: []   // 검색 조건에 맞는 데이터만 필터링
+        realtimeArrivalList: [],  // 전체 데이터
       },
       created: function () {
         // 통신
-        this.getPosts();
+        this.getRealtimeArrivalList();
 
         // 디바운스 적용된 검색 함수 정의
-        this.debouncedSearch = _.debounce(this.search, 500);
+        this.debouncedSearch = _.debounce(this.getRealtimeArrivalList, 1000);
       },
       methods: {
-        getPosts: function () {
-          let v = this;
-          fetch('https://jsonplaceholder.typicode.com/posts')
+        getRealtimeArrivalList: function () {
+          let vm = this;
+
+          fetch(`http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/${this.query}`)
             .then(response => response.json())
             .then(function (json) {
-              v.posts = json;
-              v.filteredPosts = json;
+              vm.realtimeArrivalList = json.realtimeArrivalList;
+              vm.message = '';
             })
+            .catch(function (error) {
+              vm.message = '에러!! API 요청에 오류가 있습니다';
+            });
         },
-        search: function (val) {
-          this.filteredPosts = this.posts.filter(post => post.title.includes(val));
-        }
       },
       watch: {
         query: function (val) {
+          this.message = '로딩 ....';
           this.debouncedSearch(val);
         }
       }

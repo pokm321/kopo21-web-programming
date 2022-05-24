@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: rgb(53, 53, 53);
+      color: azure;
+      margin: 30px;
+    }
+
+    img {
+      display: inline-block;
+      width: 40%;
+    }
+
+    #info {
+      font-weight: 900;
+      margin: 20px;
+      border-radius: 25px;
+      background: dimgray;
+      padding: 20px;
+    }
+
+    #infoBox {
+      position: absolute;
+    }
+  </style>
+
+  <script>
+    $(function () {
+      const queryString = window.location.search;
+      const parameters = new URLSearchParams(queryString);
+      const id = parameters.get("id");
+
+      fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1`)
+        .then(response => response.json())
+        .then(movie => {
+          let detail = $("#detail")
+          detail.append(`<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
+          <span id="infoBox">
+            <p id="info">발매일&nbsp &nbsp ${movie.release_date}</p>
+            <p id="info">평점&nbsp &nbsp &nbsp&nbsp ${movie.vote_average}</p>
+            <p id="info">인기도&nbsp &nbsp ${movie.popularity}</p>
+          </span>
+          <h1>${movie.title}</h1>
+          <li>${movie.overview}</li><br>`)
+        })
+    })
+
+
+  </script>
+
+  <div id="detail"></div>
+</body>
+
+</html>
