@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+
+  <div id="app">
+    <h3>양방향 바인딩</h3>
+    <input v-model="message">
+    <div>
+      {{ message }}
+    </div>
+  </div>
+
+  <div id="app2">
+    <h3>watch</h3>
+    <input v-model="firstName">
+    <input v-model="lastName">
+    {{ fullName }}
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message: "Hello World"
+      }
+    })
+
+    var vm = new Vue({
+      el: '#app2',
+      data: {
+        firstName: 'Foo',
+        lastName: 'Bar',
+        fullName: 'Foo Bar'
+      },
+      watch: {
+        firstName: function (val) {
+          this.fullName = val + ' ' + this.lastName
+        },
+        lastName: function (val) {
+          this.fullName = this.firstName + ' ' + val
+        }
+      },
+      created: function () {
+        // 생성자
+        this.greeting();
+        this.bye();
+
+      },
+      methods: {
+        greeting: function () {
+          console.log("Hello");
+        },
+        bye: function () {
+          console.log("Bye");
+        }
+      }
+    })
+
+
+  </script>
+
+
+</body>
+
+</html>
