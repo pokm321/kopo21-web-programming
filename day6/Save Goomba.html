@@ -187,13 +187,13 @@
       $("#tutorial").show();
       $("#tutorial").delay(2000).fadeOut();
       $("#goomba").css("filter", "grayscale(0)");
+      $("#goomba").css("top", GOOMBA_START_POINT)
     }
 
     function gameOver() {
       isDead = true;
       clearInterval(gameFrame);
       $("img").stop(true, true)
-      $("#goomba").css("top", GOOMBA_START_POINT)
 
       $("#gameOver").css("opacity", "1")
       if (breakRecord) {
