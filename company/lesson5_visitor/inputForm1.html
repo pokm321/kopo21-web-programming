@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+  <script>
+    function checkCharacter(obj) {
+      var regExp = /[1234567890\ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+
+      for (var i = obj.value.length - 1; i >= 0; i--) {
+        if (regExp.test(obj.value.charAt(i))) {
+          obj.value = obj.value.substring(0, i) + obj.value.substring(i + 1, obj.value.length)
+          i++;
+        }
+      }
+    }
+  </script>
+
+  <!-- 성적 추가하는 페이지 -->
+  <h1>성적입력추가2</h1><br>
+  <form action="insertDB.jsp"> <!-- 각각 입력창의 값을 insertDB.jsp로 넘긴다-->
+    <input type="submit" value="추가"><br><br>
+    <table>
+      <tr>
+        <td id="label">이름</td>
+        <td id="data"><input type="text" name="name" maxlength="13" onkeyup="checkCharacter(this)" onkeydown="checkCharacter(this)"></td>
+      </tr>
+      <tr>
+        <td>학번</td>
+        <td>자동부여</td>
+      </tr>
+      <tr>
+        <td>국어</td>
+        <td><input type="number" min="0" max="100" name="kor"></td>
+      </tr>
+      <tr>
+        <td>영어</td>
+        <td><input type="number" min="0" max="100" name="eng"></td>
+      </tr>
+      <tr>
+        <td>수학</td>
+        <td><input type="number" min="0" max="100" name="mat"></td>
+      </tr>
+    </table>
+  </form>
+
+</body>
+</html>

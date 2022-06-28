@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <script>
+    function selected(buttonNumber) {
+      for (i = 0; i < 3; i++) {
+        if (buttonNumber == i) {
+          document.getElementsByName("button")[i].style.backgroundColor = "dimgrey";
+          document.getElementsByName("button")[i].style.color = "white";
+        } else {
+          document.getElementsByName("button")[i].style.backgroundColor = "lightgrey";
+          document.getElementsByName("button")[i].style.color = "black";
+        }
+      }
+    }
+  </script>
+  <a href="A_01.jsp" target="workframe" name="button" id="menu1" onclick="selected(0)">후보등록</a>
+  <a href="B_01.jsp" target="workframe" name="button" id="menu2" onclick="selected(1)">투표</a>
+  <a href="C_01.jsp" target="workframe" name="button" id="menu3" onclick="selected(2)">개표결과</a>
+</body>
+</html>

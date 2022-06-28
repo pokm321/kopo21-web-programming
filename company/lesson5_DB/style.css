@@ -1,0 +1,40 @@
+table, tr, td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+table {
+  width: 600px;
+}
+
+#label {
+  width: 50px;
+}
+
+#menu {
+  display: inline-block;
+  border: 2px solid dimgray;
+  padding: 4%;
+  font-size: larger;
+  font-weight: bold;
+  border-radius: 5%;
+  text-decoration: none;
+  color: black;
+  background-color: lightgrey;
+  margin: 2%;
+  text-align: center;
+}
+
+#menuframe {
+  width: 200px;
+  height: 600px;
+}
+
+#workframe {
+  width: 700px;
+  height: 600px;
+}
+
+#wrapper {
+  width: 1000px;
+}

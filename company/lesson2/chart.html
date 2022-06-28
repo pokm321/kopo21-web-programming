@@ -1,0 +1,101 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>ChartNew</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <canvas id="myChart"></canvas>
+
+</head>
+
+<body>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        // 학생 20명의 성적 만들기
+        student1 = parseInt(Math.random() * 100 + 1);
+        student2 = parseInt(Math.random() * 100 + 1);
+        student3 = parseInt(Math.random() * 100 + 1);
+        student4 = parseInt(Math.random() * 100 + 1);
+        student5 = parseInt(Math.random() * 100 + 1);
+        student6 = parseInt(Math.random() * 100 + 1);
+        student7 = parseInt(Math.random() * 100 + 1);
+        student8 = parseInt(Math.random() * 100 + 1);
+        student9 = parseInt(Math.random() * 100 + 1);
+        student10 = parseInt(Math.random() * 100 + 1);
+        student11 = parseInt(Math.random() * 100 + 1);
+        student12 = parseInt(Math.random() * 100 + 1);
+        student13 = parseInt(Math.random() * 100 + 1);
+        student14 = parseInt(Math.random() * 100 + 1);
+        student15 = parseInt(Math.random() * 100 + 1);
+        student16 = parseInt(Math.random() * 100 + 1);
+        student17 = parseInt(Math.random() * 100 + 1);
+        student18 = parseInt(Math.random() * 100 + 1);
+        student19 = parseInt(Math.random() * 100 + 1);
+        student20 = parseInt(Math.random() * 100 + 1);
+
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                // 학생 20명의 이름
+                labels: ["홍길1", "홍길2", "홍길3", "홍길4", "홍길5", "홍길6", "홍길7", "홍길8", "홍길9", "홍길10",
+                    "홍길11", "홍길12", "홍길13", "홍길14", "홍길15", "홍길16", "홍길17", "홍길18", "홍길19", "홍길20"],
+                datasets: [{
+                    label: '점수 (100점 만점)', // 제목
+                    // 성적 집어넣기
+                    data: [student1, student2, student3, student4, student5, student6, student7, student8, student9, student10,
+                        student11, student12, student13, student14, student15, student16, student17, student18, student19, student20],
+                    backgroundColor: [ // 막대 몸통색
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [ // 막대 외곽선색
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)'
+                    ],
+                    borderWidth: 1 // 막대 외곽선 굵기
+                }]
+            }
+        });
+    </script>
+</body>
+
+</html>

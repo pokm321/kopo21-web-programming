@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <!-- 성적 조회후 정정 /삭제를 위해 검색 -->
+  <h1>성적 조회후 정정 / 삭제</h1><br>
+  <form action="showREC.jsp">
+    조회할 학번 &nbsp &nbsp &nbsp
+    <input type="number" name="studentid"> <!-- 검색어를 studentid로 넘긴다-->
+    <input type="submit" id=submit value="조회">
+  </form>
+  <br>
+  <table>
+    <tr> <!-- 빈 테이블 -->
+      <td id="label">이름</td>
+      <td id="data"></td>
+    </tr>
+    <tr>
+      <td>학번</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>국어</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>영어</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>수학</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>총점</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>평균</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>등수</td>
+      <td> </td>
+    </tr>
+  </table>
+</body>
+</html>

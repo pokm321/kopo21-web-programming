@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body onload="getDateTime(), printItems(), printResult()">
+  <script>
+    let itemName = ["오뚜기 진비빔면 4개입", "켈로그 스페셜K 오리지널시리얼", "오곡으로만든 첵스초코 마시멜로", "레고 슈퍼마리오 루이지맨션", "비타맥스 올인원로션", "비비드스튜디오 아이섀도우", "선텔라 아우라선크림", "겐조 플라워바이겐조 오 드 퍼퓸", "맥심 슈프림골드 커피믹스", "지미추 오드뚜왈렛", "지미추 플로럴 EDT", "햇반 솥반 뿌리채소 영양밥", "스팸 클래식 1세트", "블랜드 홀빈", "롯데푸드 빠삐코 (냉동), 35개", "하겐다즈 파이튼 초콜릿 (냉동)", "베스킨라빈스 아이스크림 콘 초코봉봉 5입", "빙그레 바나나맛우유, 240ml, 8개", "곰곰 슈레드 모짜렐라 피자치즈 1kg", "밀라 마스카포네 치즈, 500g, 1개", "Dole 미국산 아보카도, 1kg, 1팩", "Dole 스위티오 바나나, 6팩", "쿤달 퍼퓸 디퓨저 200ml 3개", "쿤달 퍼퓸 내추럴 소이 캔들 500g", "도브 딥플리 너리싱 바디워시", "클린앤퓨어 오가닉 목화솜 마스크 대형", "링클 스팟 안티에이징 에센스 리페어 세럼", "르오에스 비건 톤업크림 50ml", "르오에스 핑크테라피 수딩마스크팩 10매", "이니스프리 화산송이 모공 클렌징 폼"];
+    let price = [2930, 5040, 4260, 102750, 22990, 9730, 13920, 30050, 23790, 24930, 24340, 2980, 25490, 8500, 16800, 9100, 10800, 8940, 11190, 10180, 20900, 13900, 18180, 17990, 8900, 15840, 26990, 31000, 62000, 7800];
+    let num = [1, 2, 2, 1, 2, 2, 4, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 2];
+    let taxFree = [false, false, false, false, false, false, false, true, false, true, true, false, false, false, false, false, false, false, false, false, true, true, false, false, false, false, false, true, true, false];
+
+    var taxFreeItem = 0;
+    var taxedItem = 0;
+    var totalSum = 0;
+
+    function calNetPrice(sum) {
+      netPrice = parseInt(sum / (1 + 0.1));	 // int casting으로 세전금액 소수점을 버림해줌	
+      return netPrice;
+    }
+
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function getDateTime() {
+      let today = new Date();
+      let datetime = document.getElementsByName("datetime")[0];
+      datetime.textContent = today.getFullYear() + "-";
+      if (today.getMonth() < 10) {
+        datetime.textContent += 0;
+      }
+      datetime.textContent += (today.getMonth() + 1) + "-";
+      if (today.getDate() < 10) {
+        datetime.textContent += 0;
+      }
+      datetime.textContent += today.getDate() + " ";
+      if (today.getHours() < 10) {
+        datetime.textContent += 0;
+      }
+
+      document.getElementsByName("datetime")[2].textContent = datetime.textContent.replaceAll("-", "").trim() + "/00119861/00164980/31";
+
+      datetime.textContent += today.getHours() + ":";
+      if (today.getMinutes() < 10) {
+        datetime.textContent += 0;
+      }
+      datetime.textContent += today.getMinutes();
+
+      document.getElementsByName("datetime")[1].textContent = datetime.textContent;
+      if (today.getSeconds() < 10) {
+        document.getElementsByName("datetime")[1].textContent += 0;
+      }
+      document.getElementsByName("datetime")[1].textContent += ":" + today.getSeconds();
+    }
+
+    function printItems() {
+      var itemList = document.getElementById("itemList");
+
+      for (let i = 0; i < itemName.length; i++) {
+        if (i % 5 == 0) {
+          itemList.innerHTML += "<tr><td colspan='5'>----------------------------------------------------</td></tr>";
+        }
+
+        var lengthCount = 0;
+        var cutName = "";
+        for (let j = 0; j < itemName[i].length; j++) {
+          var encodedChar = encodeURI(itemName[i].charAt(j));
+
+          if (encodedChar.length > 1 && encodedChar != "%20") { // 한글인경우
+            lengthCount = lengthCount + 2;
+            cutName += itemName[i].charAt(j);
+          } else {
+            lengthCount++;
+            cutName += itemName[i].charAt(j);
+          }
+
+          if (lengthCount > 13) {
+            break;
+          }
+        }
+
+        if (taxFree[i]) {
+          var star = "*";
+          taxFreeItem += price[i] * num[i];
+        } else {
+          var star = " ";
+          taxedItem += price[i] * num[i];
+        }
+
+        itemList.innerHTML += "<tr><td id='left'>" + star + "</td><td id='left'>" + cutName + "</td><td id='right'>" + numberWithCommas(price[i]) + "</td><td id='right'>" + numberWithCommas(num[i]) + "</td><td id='right'>" + numberWithCommas(price[i] * num[i]) + "</td></tr>"
+      }
+
+      if (itemName.length % 5 == 0) {
+        itemList.innerHTML += "<tr><td colspan='5'>----------------------------------------------------</td></tr>";
+      }
+    }
+
+    function printResult() {
+      var point = 5473;
+
+      document.getElementsByName("totalNumber")[0].textContent = numberWithCommas(itemName.length);
+      document.getElementsByName("taxFreeItem")[0].textContent = numberWithCommas(taxFreeItem);
+      document.getElementsByName("taxedItem")[0].textContent = numberWithCommas(calNetPrice(taxedItem));
+      document.getElementsByName("totalTax")[0].textContent = numberWithCommas(taxedItem - calNetPrice(taxedItem));
+      document.getElementsByName("totalSum")[0].textContent = numberWithCommas(taxedItem + taxFreeItem);
+      document.getElementsByName("totalSum")[1].textContent = numberWithCommas(taxedItem + taxFreeItem);
+      document.getElementsByName("totalSum")[2].textContent += numberWithCommas(taxedItem + taxFreeItem);
+      document.getElementsByName("point")[0].textContent = numberWithCommas(parseInt((taxedItem + taxFreeItem) / 1000));
+      document.getElementsByName("point")[1].textContent = numberWithCommas(parseInt((taxedItem + taxFreeItem) / 1000) + point) + "(";
+      document.getElementsByName("point")[2].textContent = numberWithCommas(point) + ")";
+
+
+    }
+  </script>
+
+  <style>
+    table {
+      width: 350px;
+    }
+
+    .name {
+      max-width: 110;
+      overflow: hidden;
+    }
+
+    #left {
+      text-align: left;
+    }
+
+    #center {
+      text-align: center;
+    }
+
+    #right {
+      text-align: right;
+    }
+  </style>
+
+  <table>
+    <tr>
+      <td rowspan="3" id="left">&nbsp &nbsp emart &nbsp &nbsp</td>
+      <td id="left">이마트 죽전점 (031)888-1234</td>
+    </tr>
+    <tr>
+      <td id="left">206-86-50913 강희석</td>
+    </tr>
+    <tr>
+      <td id="left">용인 수지구 포은대로 552</td>
+    </tr>
+    <tr>
+      <td>&nbsp</td>
+    </tr>
+    <tr>
+      <td colspan="2" id="left">영수증 미지참시 교환/환불 불가</td>
+    </tr>
+    <tr>
+      <td colspan="2" id="left">정상상품에 한함, 30일 이내(신선 7일)</td>
+    </tr>
+    <tr>
+      <td colspan="2" id="left">※일부 브랜드매장 제외(매장 고지물참조)</td>
+    </tr>
+    <tr>
+      <td colspan="2" id="left">교환/환불 구매점에서 가능(결제카드 지참)</td>
+    </tr>
+    <tr>
+      <td>&nbsp</td>
+    </tr>
+  </table>
+
+  <table id="itemList">
+    <tr>
+      <td colspan="3" id="left">[구 매] <span name="datetime"></span></td>
+      <td colspan="2" id="right">POS:0011-9861</td>
+    </tr>
+    <tr>
+      <td colspan='5'>----------------------------------------------------</td>
+    </tr>
+    <tr>
+      <td width='10' id='left'></td>
+      <td width='110' id='left'>상 품 명</td>
+      <td width='50' id='right'>단 가</td>
+      <td width='30' id='right'>수량</td>
+      <td width='50' id='right'>금 액</td>
+    </tr>
+    <!-- javascript로 아이템이 추가되는 부분-->
+  </table>
+
+  <table>
+    <tr>
+      <td colspan="4">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp총 품목 수량</td>
+      <td id="right" name="totalNumber"></td>
+    </tr>
+    <tr>
+      <td colspan="4">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp(*) 면 세 &nbsp 물 품</td>
+      <td id="right" name="taxFreeItem"></td>
+    </tr>
+    <tr>
+      <td colspan="4">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp과 세 &nbsp 물 품</td>
+      <td id="right" name="taxedItem"></td>
+    </tr>
+    <tr>
+      <td colspan="4">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp부 &nbsp&nbsp 가 &nbsp&nbsp 세</td>
+      <td id="right" name="totalTax"></td>
+    </tr>
+    <tr>
+      <td colspan="4">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp합 &nbsp &nbsp &nbsp &nbsp &nbsp 계</td>
+      <td id="right" name="totalSum"></td>
+    </tr>
+    <tr>
+      <td colspan="4">결 제 대 상 금 액</td>
+      <td id="right" name="totalSum"></td>
+    </tr>
+    <tr>
+      <td colspan='5'>----------------------------------------------------</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td id="left">0012 KEB 하나</td>
+      <td id="right">541707**0484/35860658</td>
+    </tr>
+    <tr>
+      <td id="left">카드결제(IC)</td>
+      <td id="right" name="totalSum">일시불 / </td>
+    </tr>
+    <tr>
+      <td colspan='2'>----------------------------------------------------</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td id="center" colspan="3">[신세계포인트 적립]</td>
+    </tr>
+    <tr>
+      <td colspan="3">홍*두 고객님의 포인트 현황입니다.</td>
+    </tr>
+    <tr>
+      <td>금회발생포인트</td>
+      <td id="right">9350**9995</td>
+      <td name="point" id="right" width="80"></td>
+    </tr>
+    <tr>
+      <td>누계(가용)포인트</td>
+      <td name="point" id="right"></td>
+      <td name="point" id="right"></td>
+    </tr>
+    <tr>
+      <td colspan="3">*신세계포인트 유효기간은 2년입니다.</td>
+    </tr>
+    <tr>
+      <td colspan='3'>----------------------------------------------------</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td colspan="2" id="center">구매금액기준 무료주차시간 자동부여</td>
+    </tr>
+    <tr>
+      <td>차량번호 :</td>
+      <td id="right">34저****</td>
+    </tr>
+    <tr>
+      <td>입차시간 :</td>
+      <td id="right" name="datetime"></td>
+    </tr>
+    <tr>
+      <td colspan='2'>----------------------------------------------------</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td>캐셔:084599 양00</td>
+      <td id="right">1150</td>
+    </tr>
+    <tr>
+      <td id="center" colspan="2">|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</td>
+    </tr>
+    <tr>
+      <td id="center" colspan="2">|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</td>
+    </tr>
+    <tr>
+      <td id="center" colspan="2" name="datetime"></td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

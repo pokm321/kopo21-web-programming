@@ -1,0 +1,13 @@
+#menu {
+  display: inline-block;
+  border: 2px solid dimgray;
+  padding: 4%;
+  font-size: larger;
+  font-weight: bold;
+  border-radius: 5%;
+  text-decoration: none;
+  color: black;
+  background-color: lightgrey;
+  margin: 2%;
+  text-align: center;
+}

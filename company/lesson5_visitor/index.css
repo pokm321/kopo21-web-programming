@@ -1,0 +1,30 @@
+#menu {
+  display: inline-block;
+  border: 2px solid dimgray;
+  padding: 4%;
+  font-size: larger;
+  font-weight: bold;
+  border-radius: 5%;
+  text-decoration: none;
+  color: black;
+  background-color: lightgrey;
+  margin: 2%;
+  text-align: center;
+}
+
+#submit {
+  margin: 5px;
+}
+
+table, tr, td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+#label {
+  width: 150px;
+}
+
+#data {
+  width: 500px;
+}
