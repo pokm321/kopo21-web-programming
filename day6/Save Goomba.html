@@ -187,15 +187,15 @@
       $("#tutorial").show();
       $("#tutorial").delay(2000).fadeOut();
       $("#goomba").css("filter", "grayscale(0)");
+      $("#goomba").css("top", GOOMBA_START_POINT);
     }
 
     function gameOver() {
       isDead = true;
       clearInterval(gameFrame);
-      $("img").stop(true, true)
-      $("#goomba").css("top", GOOMBA_START_POINT)
+      $("img").stop(true, true);
 
-      $("#gameOver").css("opacity", "1")
+      $("#gameOver").css("opacity", "1");
       if (breakRecord) {
         $("#gameOverScore").html("HIGH SCORE!<br><br><br>BEST ROUND: " + highScore + "&nbsp &nbsp &nbspTHIS ROUND: " + score + "<br><br><br><br>PRESS SPACEBAR TO RESTART")
       } else {
@@ -253,9 +253,9 @@
       let goombaRight = parseInt($("#goomba").css("left")) + parseInt($("#goomba").css("width"));
 
       if (isWeird) {
-        var mario = $(".weird")
+        var mario = $(".weird");
       } else {
-        var mario = $(".classic")
+        var mario = $(".classic");
       }
 
       let marioTop = parseInt(mario.css("top"));
@@ -270,8 +270,8 @@
       }
 
       if (fireRight > marioLeft && fireLeft < marioRight && isFiring == true) {
-        $("#fire").stop(true, true)
-        mario.stop(true, true)
+        $("#fire").stop(true, true);
+        mario.stop(true, true);
       }
     }
 
@@ -282,9 +282,9 @@
 
       isJumping = true;
       $("#goomba").animate({
-        top: "-=" + GOOMBA_JUMPING_ABILITY + "px"
+        top: "-=" + GOOMBA_JUMPING_ABILITY + "px";
       }, 420).animate({
-        top: "+=" + GOOMBA_JUMPING_ABILITY + "px"
+        top: "+=" + GOOMBA_JUMPING_ABILITY + "px";
       }, 420, function () {
         isJumping = false;
       })
@@ -298,10 +298,10 @@
       isFiring = true;
       $("#goomba").css("filter", "grayscale(0.7)");
       $("#fire").css("opacity", "1").animate({
-        left: "+=1500px"
+        left: "+=1500px";
       }, GOOMBA_FIRE_SPEED, function () {
         $(this).css("opacity", "0").css("left", FIRE_START_POINT)
-        isCooldown = true
+        isCooldown = true;
         isFiring = false;
         setTimeout(() => {
           isCooldown = false;
